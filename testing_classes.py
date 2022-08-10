@@ -2,66 +2,59 @@ from classes import Television
 
 tv = Television()
 
+def tear_down():
+    del tv
+
 def test_power():
     """
     - Switch TV on/off
     - Assert it's status has changed
     """
-    status = tv.get_status()
+    assert tv.__str__() == "TV status: Is on = False, Channel = 0, Volume = 0"
     tv.power()
-    assert tv.get_status() != status
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
 
-def test_change_channel_while_off():
+def test_channel_changing():
+
     """
     - Check if channel changes when TV is off
-    - Assert it does not change
     """
-    if tv.get_status():
-        tv.power()
-    channel = tv.get_channel()
+    tv.power()
     tv.channel_up()
-    assert tv.get_channel() == channel
+    assert tv.__str__() == "TV status: Is on = False, Channel = 0, Volume = 0"
 
-def test_channel_up():
     """
     - Check if channel up works
-    - Assert it changes
     """
-    if not tv.get_status():
-        tv.power()
-    channel_nxt = tv.get_channel() + 1
-    if channel_nxt > tv.MAX_CHANNEL:
-        channel_nxt = tv.MIN_CHANNEL
+    tv.power()
     tv.channel_up()
-    assert tv.get_channel() == channel_nxt
+    assert tv.__str__() == "TV status: Is on = True, Channel = 1, Volume = 0"
+    tv.channel_up()
+    tv.channel_up()
+    tv.channel_up()
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
 
-def test_channel_down():
     """
     - Check if channel down works
-    - Assert it changes
     """
-    if not tv.get_status():
-        tv.power()
-    channel_prvs = tv.get_channel() - 1
-    if channel_prvs < tv.MIN_CHANNEL:
-        channel_prvs = tv.MAX_CHANNEL
     tv.channel_down()
-    assert tv.get_channel() == channel_prvs
+    assert tv.__str__() == "TV status: Is on = True, Channel = 3, Volume = 0"
+    tv.channel_up()
 
-def test_volume_up():    
-    if not tv.get_status():
-        tv.power()
-    volume_nxt = tv.get_volume()
-    if volume_nxt != tv.MAX_VOLUME:
-        volume_nxt += 1
+def test_volume_changing():
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
     tv.volume_up()
-    assert tv.get_volume() == volume_nxt
-
-def test_volume_down():    
-    if not tv.get_status():
-        tv.power()
-    volume_prvs = tv.get_volume()
-    if volume_prvs != tv.MIN_VOLUME:
-        volume_prvs -= 1
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 1"
+    tv.volume_up()
+    tv.volume_up()
+    tv.volume_up()
+    tv.volume_up()
+    tv.volume_up()
+    tv.volume_up()
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 2"
     tv.volume_down()
-    assert tv.get_volume() == volume_prvs
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 1"
+    tv.volume_down()
+    tv.volume_down()
+    tv.volume_down()
+    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
