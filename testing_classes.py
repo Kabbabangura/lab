@@ -1,60 +1,64 @@
 from classes import Television
 
-tv = Television()
 
-def tear_down():
-    del tv
+class Test:
+    
+    def setup(self):
+        self.self.tv = Television()
 
-def test_power():
-    """
-    - Switch TV on/off
-    - Assert it's status has changed
-    """
-    assert tv.__str__() == "TV status: Is on = False, Channel = 0, Volume = 0"
-    tv.power()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
+    def tear_down(self):
+        del self.self.tv
 
-def test_channel_changing():
+    def test_power(self):
+        """
+        - Switch TV on/off
+        - Assert it's status has changed
+        """
+        assert self.tv.__str__() == "TV status: Is on = False, Channel = 0, Volume = 0"
+        self.self.tv.power()
+        assert self.self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
 
-    """
-    - Check if channel changes when TV is off
-    """
-    tv.power()
-    tv.channel_up()
-    assert tv.__str__() == "TV status: Is on = False, Channel = 0, Volume = 0"
+    def test_channel_changing(self):
 
-    """
-    - Check if channel up works
-    """
-    tv.power()
-    tv.channel_up()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 1, Volume = 0"
-    tv.channel_up()
-    tv.channel_up()
-    tv.channel_up()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
+        """
+        - Check if channel changes when TV is off
+        """
+        self.self.tv.power()
+        self.self.tv.channel_up()
+        assert self.self.tv.__str__() == "TV status: Is on = False, Channel = 0, Volume = 0"
 
-    """
-    - Check if channel down works
-    """
-    tv.channel_down()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 3, Volume = 0"
-    tv.channel_up()
+        """
+        - Check if channel up works
+        """
+        self.self.tv.power()
+        self.self.tv.channel_up()
+        assert self.self.tv.__str__() == "TV status: Is on = True, Channel = 1, Volume = 0"
+        self.self.tv.channel_up()
+        self.self.tv.channel_up()
+        self.self.tv.channel_up()
+        assert self.self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
 
-def test_volume_changing():
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
-    tv.volume_up()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 1"
-    tv.volume_up()
-    tv.volume_up()
-    tv.volume_up()
-    tv.volume_up()
-    tv.volume_up()
-    tv.volume_up()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 2"
-    tv.volume_down()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 1"
-    tv.volume_down()
-    tv.volume_down()
-    tv.volume_down()
-    assert tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
+        """
+        - Check if channel down works
+        """
+        self.self.tv.channel_down()
+        assert self.tv.__str__() == "TV status: Is on = True, Channel = 3, Volume = 0"
+        self.tv.channel_up()
+
+    def test_volume_changing(self):
+        assert self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"
+        self.tv.volume_up()
+        assert self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 1"
+        self.tv.volume_up()
+        self.tv.volume_up()
+        self.tv.volume_up()
+        self.tv.volume_up()
+        self.tv.volume_up()
+        self.tv.volume_up()
+        assert self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 2"
+        self.tv.volume_down()
+        assert self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 1"
+        self.tv.volume_down()
+        self.tv.volume_down()
+        self.tv.volume_down()
+        assert self.tv.__str__() == "TV status: Is on = True, Channel = 0, Volume = 0"

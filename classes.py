@@ -5,7 +5,7 @@ class Television:
     MIN_VOLUME : int = 0      # Minimum TV volume
     MAX_VOLUME : int = 2      # Maximum TV volume
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         - Create a private variable to store the TV channel. It should be set to the minimum TV channel by default.
         - Create a private variable to store the TV volume. It should be set to the minimum TV volume by default.
@@ -15,7 +15,7 @@ class Television:
         self.__volume = self.MIN_VOLUME
         self.__status = False
 
-    def power(self):
+    def power(self) -> None:
         """
         - This method should be used to turn the TV on/off.
         - If called on a TV object that is off, the TV object should be turned on.
@@ -26,7 +26,7 @@ class Television:
         else:
             self.__status = True
 
-    def channel_up(self):
+    def channel_up(self -> None):
         """
         - This method should be used to adjust the TV channel by incrementing its value.
         - It should only work for a TV that is on.
@@ -42,7 +42,7 @@ class Television:
             else:
                 self.__channel = self.__channel + 1
 
-    def channel_down(self):
+    def channel_down(self) -> None:
         """
         - This method should be used to adjust the TV channel by decrementing its value.
         - It should only work for a TV that is on.
@@ -58,7 +58,7 @@ class Television:
             else:
                 self.__channel = self.__channel - 1
 
-    def volume_up(self):
+    def volume_up(self) -> None:
         """
         - This method should be used to adjust the TV volume by incrementing its value.
         - It should only work for a TV that is on.
@@ -70,7 +70,7 @@ class Television:
             if self.__volume != self.MAX_VOLUME:
                 self.__volume = self.__volume + 1
 
-    def volume_down(self):
+    def volume_down(self) -> None:
         """
         - This method should be used to adjust the TV volume by decrementing its value.
         - It should only work for a TV that is on.
